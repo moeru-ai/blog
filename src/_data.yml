@@ -1,0 +1,16 @@
+lang: en
+
+home:
+  welcome: does kindness plus sadness equal to zero?
+
+menu_links: []
+extra_head: []
+
+# Metas plugin https://lume.land/plugins/metas/#description
+metas:
+  site: Moeru AI Blog
+  description: does kindness plus sadness equal to zero?
+  title: '=title'
+  image: '=image'
+  # twitter: "@username"
+  lang: en
