@@ -1,5 +1,5 @@
 ---
-title: Introducing xsAI
+title: Introducing xsAI,<br />a < 6KB AI SDK Alternative
 date: 2025-03-03
 author: 藍+85CD
 tags:
@@ -21,6 +21,10 @@ Without further ado, let's look:
 [![pkg-size-xsai](/images/pkg-size-xsai.png)](https://pkg-size.dev/xsai@0.1.0-beta.9)
 
 It's roughly a hundred times smaller than the Vercel AI SDK (*install size) and has most of its features.
+
+Also it is 5.7KB gzipped, so the title is not wrong.
+
+[![pkg-size-xsai-bundle](/images/pkg-size-xsai-bundle.png)](https://pkg-size.dev/xsai@0.1.0-beta.9)
 
 ## Getting started
 
