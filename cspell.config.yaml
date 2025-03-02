@@ -3,9 +3,11 @@ ignorePaths: []
 dictionaryDefinitions: []
 dictionaries: []
 words:
+  - arktype
   - lume
   - metas
   - moeru
+  - valibot
   - xsai
 ignoreWords: []
 import: []
