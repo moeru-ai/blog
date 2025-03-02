@@ -37,9 +37,7 @@ features:
 npm i @xsai/generate-text @xsai/embed @xsai/model
 ```
 
-### Examples
-
-#### Generating Text
+### Generating Text
 
 So let's start with some simple examples.
 
@@ -66,7 +64,7 @@ xsAI does not use the provider function by default, it is split into `apiKey`, `
 
 This allows xsAI to support any OpenAI-compatible API without having to create provider packages.
 
-#### Generating Text w/ Tool Calling
+### Generating Text w/ Tool Calling
 
 Continuing with the example above, we now add the tools.
 
