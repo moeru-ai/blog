@@ -10,7 +10,13 @@ author: 藍+85CD
 
 Vercel AI SDK is too big.
 
-![pkg-size](/images/pkg-size-ai.png)
+[![pkg-size-ai](/images/pkg-size-ai.png)](https://pkg-size.dev/ai@4.1.47)
+
+### So how small is xsAI?
+
+Without further ado, let's look:
+
+[![pkg-size-xsai](/images/pkg-size-xsai.png)](https://pkg-size.dev/xsai@0.1.0-beta.9)
 
 ## Get Started
 
