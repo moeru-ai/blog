@@ -1,5 +1,5 @@
 ---
-title: Introducing xsAI,<br />a < 6KB AI SDK Alternative
+title: Introducing xsAI,<br />a < 6KB Vercel AI SDK alternative
 date: 2025-03-03
 author: 藍+85CD
 tags:
@@ -10,9 +10,18 @@ tags:
 
 ## Why another AI SDK?
 
-Vercel AI SDK is too big.
+[Vercel AI SDK](https://sdk.vercel.ai/) is way too big, it includes unnecessary dependencies.
 
 [![pkg-size-ai](/images/pkg-size-ai.png)](https://pkg-size.dev/ai@4.1.47)
+
+For example, Vercel AI SDK shipped with non-optional request and response validation, non-optional
+[OpenTelemetry](https://opentelemetry.io/) dependencies, and bind the user to use [zod](https://zod.dev/) (you don't
+get to choose), and so much more...
+
+This makes it hard to build small and decent AI applications & CLI tools with less bundle size and more controllable
+and atomic capabilities that user truly needed.
+
+But, it doesn't need to be like this, isn't it?
 
 ### So how small is xsAI?
 
@@ -60,11 +69,16 @@ const { text } = await generateText({
 })
 ```
 
-xsAI does not use the provider function by default, it is split into `apiKey`, `baseURL` and `model`.
+xsAI does not use the provider function [like Vercel does](https://sdk.vercel.ai/docs/foundations/providers-and-models) by default,
+we simplified them into three shared fields: `apiKey`, `baseURL` and `model`.
 
-- apiKey: Provider API Key
-- baseURL: Provider Base URL (will be merged with the path of the corresponding util, e.g. `new URL('chat/completions', 'https://api.openai.com/v1/')`)
-- model: Name of the model to use
+- `apiKey`: Provider API Key
+- `baseURL`: Provider Base URL (will be merged with the path of the corresponding util, e.g. `new URL('chat/completions', 'https://api.openai.com/v1/')`)
+- `model`: Name of the model to use
+
+> Don't worry if you need to support non-OpenAI-compatible API provider, such as [Claude](https://claude.ai/), we left the possibilities to override
+> [`fetch(...)`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) where you can customize how the request is made,
+> and how the response was handled.
 
 This allows xsAI to support any OpenAI-compatible API without having to create provider packages.
 
@@ -102,7 +116,7 @@ const { text } = await generateText({
 })
 ```
 
-Wait, [`zod`](https://zod.dev) is not good for tree shaking. Can we use [`valibot`](https://valibot.dev)? Of course!
+Wait, [`zod`](https://zod.dev) is not good for tree shaking and annoying. Can we use [`valibot`](https://valibot.dev)? **Of course!**
 
 ```ts
 import { tool } from '@xsai/tool'
@@ -143,11 +157,24 @@ const weather = tool({
 })
 ```
 
+> xsAI doesn't limit your choices into either [`zod`](https://zod.dev), [`valibot`](https://valibot.dev), or [`arktype`](https://arktype.io), with
+> the power of [Standard Schema](https://github.com/standard-schema/standard-schema), you can use any schema library it supported you like.
+
 ## Next steps
+
+### Big fan of [Anthropic's MCP](https://www.anthropic.com/news/model-context-protocol)?
 
 We are working on [Model Context Protocol](https://modelcontextprotocol.io/introduction) support: [#84](https://github.com/moeru-ai/xsai/pull/84)
 
 After that, it could be Framework Binding.
+
+### Don't like any of the cloud provider?
+
+We are working on a [🤗 Transformers.js](https://huggingface.co/docs/transformers.js/index) provider that enables you to directly run LLMs and any
+🤗 Transformers.js supported models directly in browser, with the power of WebGPU!
+
+You can track the progress here: [#41](https://github.com/moeru-ai/xsai/issues/41). It is really cool and playful to run embedding, speech,
+and transcribing models directly in the browser, so, stay tuned!
 
 ## Documentation
 
@@ -171,3 +198,5 @@ export * from '@xsai/utils-stream'
 ```
 
 If you are interested, go to the documentation at <https://xsai.js.org/docs> to get started!
+
+Besides xsAI, we made loads of other cool stuff too! Check out our [`moeru-ai` GitHub organization](https://github.com/moeru-ai)!
