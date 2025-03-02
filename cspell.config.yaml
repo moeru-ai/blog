@@ -6,5 +6,7 @@ words:
   - lume
   - metas
   - moeru
+  - ollama
+  - xsai
 ignoreWords: []
 import: []
