@@ -148,3 +148,26 @@ const weather = tool({
 We are working on [Model Context Protocol](https://modelcontextprotocol.io/introduction) support: [#84](https://github.com/moeru-ai/xsai/pull/84)
 
 After that, it could be Framework Binding.
+
+## Documentation
+
+Since this is just an introduction article, it only covers `generate-text` and `tool`.
+
+`xsai` [has more utils:](https://github.com/moeru-ai/xsai/blob/main/packages/xsai/src/index.ts)
+
+```ts
+export * from '@xsai/embed'
+export * from '@xsai/generate-object'
+export * from '@xsai/generate-speech'
+export * from '@xsai/generate-text'
+export * from '@xsai/generate-transcription'
+export * from '@xsai/model'
+export * from '@xsai/shared-chat'
+export * from '@xsai/stream-object'
+export * from '@xsai/stream-text'
+export * from '@xsai/tool'
+export * from '@xsai/utils-chat'
+export * from '@xsai/utils-stream'
+```
+
+If you are interested, go to the documentation at <https://xsai.js.org/docs> to get started!
