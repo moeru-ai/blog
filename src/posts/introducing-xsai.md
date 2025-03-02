@@ -62,6 +62,6 @@ This allows xsAI to support any OpenAI-compatible API without having to create p
 
 ## What's Next?
 
-We are working on Model Context Protocol support: [#84](https://github.com/moeru-ai/xsai/pull/84)
+We are working on [Model Context Protocol](https://modelcontextprotocol.io/introduction) support: [#84](https://github.com/moeru-ai/xsai/pull/84)
 
 After that, it could be Framework Binding.
