@@ -9,6 +9,7 @@ import 'npm:prismjs/components/prism-json.js'
 import 'npm:prismjs/components/prism-jsx.js'
 
 export default lume({
+  location: new URL('https://blog.moeru.ai'),
   src: './src',
 })
   .use(blog())
