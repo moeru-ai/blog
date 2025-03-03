@@ -243,3 +243,9 @@ export * from '@xsai/utils-stream'
 If you are interested, go to the documentation at <https://xsai.js.org/docs> to get started!
 
 Besides xsAI, we made loads of other cool stuff too! Check out our [`moeru-ai` GitHub organization](https://github.com/moeru-ai)!
+
+## Join our Community
+
+If you have questions about anything related to xsAI,
+
+you're always welcome to ask our community on [GitHub Discussions](https://github.com/moeru-ai/xsai/discussions).
