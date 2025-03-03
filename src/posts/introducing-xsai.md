@@ -6,8 +6,6 @@ tags:
   - Announcements
 ---
 
-> A minimal AI SDK, you can run anywhere.
-
 ## Why another AI SDK?
 
 [Vercel AI SDK](https://sdk.vercel.ai/) is way too big, it includes unnecessary dependencies.
@@ -92,7 +90,7 @@ import { tool } from '@xsai/tool'
 import { env } from 'node:process'
 import * as z from 'zod'
 
-const weather = tool({
+const weather = await tool({
   name: 'weather',
   description: 'Get the weather in a location',
   parameters: z.object({
@@ -122,7 +120,7 @@ Wait, [`zod`](https://zod.dev) is not good for tree shaking and annoying. Can we
 import { tool } from '@xsai/tool'
 import { description, object, pipe, string } from 'valibot'
 
-const weather = tool({
+const weather = await tool({
   name: 'weather',
   description: 'Get the weather in a location',
   parameters: object({
@@ -144,7 +142,7 @@ We can even use [`arktype`](https://arktype.io), and the list of compatibility w
 import { tool } from '@xsai/tool'
 import { type } from 'arktype'
 
-const weather = tool({
+const weather = await tool({
   name: 'weather',
   description: 'Get the weather in a location',
   parameters: type({
@@ -160,13 +158,52 @@ const weather = tool({
 > xsAI doesn't limit your choices into either [`zod`](https://zod.dev), [`valibot`](https://valibot.dev), or [`arktype`](https://arktype.io), with
 > the power of [Standard Schema](https://github.com/standard-schema/standard-schema), you can use any schema library it supported you like.
 
+#### Easy migration
+
+Are you already using the Vercel AI SDK? Let's see how to migrate to xsAI:
+
+```diff
+- import { openai } from '@ai-sdk/openai'
+- import { generateText, tool } from 'ai'
++ import { generateText, tool } from 'xsai'
++ import { env } from 'node:process'
+import * as z from 'zod'
+
+const { text } = await generateText({
++ apiKey: env.OPENAI_API_KEY!,
++ baseURL: 'https://api.openai.com/v1/',
+- model: openai('gpt-4o')
++ model: 'gpt-4o'
+  messages: [{
+    role: 'user',
+    content: 'What is the weather in San Francisco?',
+  }],
+- tools: {
++ tools: [
+-   weather: tool({
++   await tool({
++     name: 'weather',
+      description: 'Get the weather in a location',
+      parameters: z.object({
+        location: z.string().describe('The location to get the weather for'),
+      }),
+      execute: async ({ location }) => ({
+        location,
+        temperature: 72 + Math.floor(Math.random() * 21) - 10,
+      }),
+    })
+- },
++ ],
+})
+```
+
+That's it!
+
 ## Next steps
 
 ### Big fan of [Anthropic's MCP](https://www.anthropic.com/news/model-context-protocol)?
 
 We are working on [Model Context Protocol](https://modelcontextprotocol.io/introduction) support: [#84](https://github.com/moeru-ai/xsai/pull/84)
-
-After that, it could be Framework Binding.
 
 ### Don't like any of the cloud provider?
 
@@ -175,6 +212,10 @@ We are working on a [🤗 Transformers.js](https://huggingface.co/docs/transform
 
 You can track the progress here: [#41](https://github.com/moeru-ai/xsai/issues/41). It is really cool and playful to run embedding, speech,
 and transcribing models directly in the browser, so, stay tuned!
+
+### Need framework bindings?
+
+We will do this in v0.2. See you next time!
 
 ## Documentation
 
