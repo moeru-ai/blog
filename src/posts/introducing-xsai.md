@@ -158,7 +158,7 @@ const weather = await tool({
 > xsAI doesn't limit your choices into either [`zod`](https://zod.dev), [`valibot`](https://valibot.dev), or [`arktype`](https://arktype.io), with
 > the power of [Standard Schema](https://github.com/standard-schema/standard-schema), you can use any schema library it supported you like.
 
-#### Easy migration
+### Easy migration
 
 Are you already using the Vercel AI SDK? Let's see how to migrate to xsAI:
 
