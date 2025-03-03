@@ -4,6 +4,8 @@ date: 2025-03-03
 author: 藍+85CD, Neko Ayaka
 tags:
   - Announcements
+metas:
+  description: extra-small AI SDK for Browser, Node.js, Deno, Bun or Edge Runtime.
 ---
 
 ## Why another AI SDK?
