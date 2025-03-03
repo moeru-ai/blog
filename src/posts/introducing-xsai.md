@@ -14,7 +14,7 @@ metas:
 
 [![pkg-size-ai](/images/pkg-size-ai.png)](https://pkg-size.dev/ai@4.1.47)
 
-For example, Vercel AI SDK shipped with non-optional request and response validation, non-optional
+For example, Vercel AI SDK shipped with non-optional
 [OpenTelemetry](https://opentelemetry.io/) dependencies, and bind the user to use [zod](https://zod.dev/) (you don't
 get to choose), and so much more...
 
