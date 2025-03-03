@@ -1,7 +1,7 @@
 ---
 title: Introducing xsAI,<br />a < 6KB Vercel AI SDK alternative
 date: 2025-03-03
-author: 藍+85CD
+author: 藍+85CD, Neko Ayaka
 tags:
   - Announcements
 ---
