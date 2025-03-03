@@ -3,6 +3,7 @@ import blog from 'blog/mod.ts'
 
 // import 'npm:prismjs/components/prism-markdown.js'
 // import 'npm:prismjs/components/prism-yaml.js'
+import 'npm:prismjs/components/prism-diff.js'
 import 'npm:prismjs/components/prism-typescript.js'
 import 'npm:prismjs/components/prism-json.js'
 import 'npm:prismjs/components/prism-jsx.js'
