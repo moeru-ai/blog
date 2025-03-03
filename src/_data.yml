@@ -3,14 +3,20 @@ lang: en
 home:
   welcome: does kindness plus sadness equal to zero?
 
-menu_links: []
-extra_head: []
+menu_links:
+  - text: GitHub
+    href: https://github.com/moeru-ai
+  - text: HuggingFace
+    href: https://huggingface.co/moeru-ai
+
+extra_head:
+  - '<script defer data-domain="blog.moeru.ai" src="https://plausible.kwaa.dev/js/script.js"></script>'
 
 # Metas plugin https://lume.land/plugins/metas/#description
 metas:
   site: Moeru AI Blog
   description: does kindness plus sadness equal to zero?
-  title: '=title'
-  image: '=image'
+  title: "=title"
+  image: "=image"
   # twitter: "@username"
   lang: en
