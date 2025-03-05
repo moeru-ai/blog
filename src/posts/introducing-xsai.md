@@ -6,6 +6,7 @@ tags:
   - Announcements
 metas:
   description: extra-small AI SDK for Browser, Node.js, Deno, Bun or Edge Runtime.
+  image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.1.0&wide=true
 ---
 
 ## Why another AI SDK?
