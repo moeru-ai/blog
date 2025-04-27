@@ -20,7 +20,7 @@ This version codename still corresponds to a song by Kizuna AI and you can liste
 OK, so here's the new features:
 
 - [Generate image](#generate-image)
-- Reasoning utils
+- [Reasoning utils](#reasoning-utils)
 - (experimental) Tool returns schema
 - More schema library supported
 - More providers
@@ -30,7 +30,7 @@ OK, so here's the new features:
 
 GPT 4o Image Generation is very popular these days, isn't it?
 
-Now you can also use it via API and xsAI:
+Now you can also use it via API and [`@xsai/generate-image`](https://xsai.js.org/docs/packages/generate/image):
 
 ```ts
 import { generateImage } from '@xsai/generate-image'
@@ -55,6 +55,44 @@ const { images } = await generateImage({
 ```
 
 If this feature is popular, we may introduce `editImage` later.
+
+## Reasoning Utils
+
+We made [`@xsai/utils-reasoning`](https://xsai.js.org/docs/packages/utils/reasoning) for models like `qwq` and `deepseek-r1`:
+
+```ts
+import { generateText } from '@xsai/generate-text'
+import { streamText } from '@xsai/stream-text'
+import { extractReasoning, extractReasoningStream } from '@xsai/utils-reasoning'
+ 
+const messages = [
+  {
+    content: 'You\'re a helpful assistant.',
+    role: 'system'
+  },
+  {
+    content: 'Why is the sky blue?',
+    role: 'user'
+  },
+]
+
+const { text: rawText } = await generateText({
+  baseURL: 'http://localhost:11434/v1/',
+  messages,
+  model: 'deepseek-r1',
+})
+
+const { textStream: rawTextStream } = await streamText({
+  baseURL: 'http://localhost:11434/v1/',
+  messages,
+  model: 'deepseek-r1',
+})
+
+// { reasoning: string | undefined, text: string }
+const { reasoning, text } = extractReasoning(rawText!)
+// { reasoningStream: ReadableStream<string>, textStream: ReadableStream<string> }
+const { reasoningStream, textStream } = extractReasoningStream(rawTextStream) 
+```
 
 ## More Integrations
 
