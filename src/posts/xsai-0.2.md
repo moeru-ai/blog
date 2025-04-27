@@ -24,6 +24,7 @@ OK, so here's the new features:
 - (experimental) Tool returns schema
 - More schema library supported
 - More providers
+- [More integrations](#more-integrations)
 
 ## Generate Image
 
@@ -54,6 +55,12 @@ const { images } = await generateImage({
 ```
 
 If this feature is popular, we may introduce `editImage` later.
+
+## More Integrations
+
+Did you know? We now have official [Agentic](https://agentic.so/sdks/xsai) and [VoltAgent](https://voltagent.dev/docs/agents/providers/#voltagentxsai-xsai-provider) integrations.
+
+We also have [Transformer.js](https://github.com/moeru-ai/xsai-transformers) and [unSpeech](https://github.com/moeru-ai/unspeech/tree/main/sdk/typescript) providers (these are one of Moeru AI's projects!)
 
 ## Join our Community
 
