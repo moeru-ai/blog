@@ -21,9 +21,8 @@ OK, so here's the new features:
 
 - [Generate image](#generate-image)
 - [Reasoning utils](#reasoning-utils)
-- (experimental) Tool returns schema
-- More schema library supported
-- More providers
+- [More schema library supported](#more-schema-library-supported)
+- [More providers](#more-providers)
 - [More integrations](#more-integrations)
 
 ## Generate Image
@@ -93,6 +92,18 @@ const { reasoning, text } = extractReasoning(rawText!)
 // { reasoningStream: ReadableStream<string>, textStream: ReadableStream<string> }
 const { reasoningStream, textStream } = extractReasoningStream(rawTextStream) 
 ```
+
+## More schema library supported
+
+We have supported [Zod 4 Beta](https://v4.zod.dev) before it was officially released. (also includes [`@zod/mini`](https://v4.zod.dev/packages/mini)!)
+
+[Effect Schema](https://effect.website/docs/schema/introduction/) is supported as well.
+
+## More providers
+
+We now support [Featherless](https://featherless.ai).
+
+Did you know we've added a lot of providers? view [here](https://github.com/moeru-ai/xsai/tree/main/packages-ext/providers-cloud/src/providers).
 
 ## More Integrations
 
