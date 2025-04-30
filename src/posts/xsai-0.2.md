@@ -116,7 +116,7 @@ We now get a new dedicated project called [`xsai-transformers`](https://github.c
 If you are interested, [try it on our live demo](https://xsai-transformers.netlify.app/).
 
 ```bash
-npm install xsai-transformers
+npm i xsai-transformers
 ```
 
 It feels like this when using it:
