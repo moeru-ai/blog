@@ -12,7 +12,10 @@ words:
   - metas
   - moeru
   - neko
+  - ollama
+  - unspeech
   - valibot
+  - xenova
   - xsai
 ignoreWords: []
 import: []

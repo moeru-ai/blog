@@ -13,7 +13,7 @@ I'm pleased to announce the release of xsAI v0.2.
 
 This version codename still corresponds to a song by Kizuna AI and you can listen to it:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OIdlW0u3ZXc" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="405" src="https://www.youtube.com/embed/OIdlW0u3ZXc" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ~~btw, v0.1 is ["Hello World"](https://www.youtube.com/watch?v=FrcR9qvjwmo)~~
 
@@ -107,7 +107,7 @@ Did you know we've added a lot of providers? view [here](https://github.com/moer
 
 ### Special providers
 
-#### New [🤗 Transformer.js provider](https://github.com/moeru-ai/xsai-transformers)
+#### New 🤗 Transformer.js provider
 
 Have you dreamed about a possible future where you can use `xsAI` completely offline without Ollama and other inference server setup? We mentioned a bit in the previous blog post about our roadmap, here we come.
 
