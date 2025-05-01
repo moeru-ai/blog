@@ -6,7 +6,7 @@ tags:
   - Announcements
 metas:
   description: extra-small AI SDK.
-#   image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.2.0&wide=true
+  image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.2.0&wide=true
 ---
 
 I'm pleased to announce the release of xsAI v0.2.
