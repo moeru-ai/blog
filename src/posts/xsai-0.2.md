@@ -1,7 +1,7 @@
 ---
 title: 'Announcing xsAI 0.2 "over the reality"'
 date: 2025-05-01
-author: 藍+85CD
+author: 藍+85CD, Neko Ayaka
 tags:
   - Announcements
 metas:
