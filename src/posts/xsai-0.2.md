@@ -152,7 +152,7 @@ npm i unspeech
 
 ## More Integrations
 
-Did you know? We now have official [Agentic](https://agentic.so/sdks/xsai) and [VoltAgent](https://voltagent.dev/docs/agents/providers/#voltagentxsai-xsai-provider) integrations.
+Did you know? We now have official [Agentic](https://agentic.so/sdks/xsai) and [VoltAgent](https://voltagent.dev/docs/providers/xsai/) integrations.
 
 ## Join our Community
 
