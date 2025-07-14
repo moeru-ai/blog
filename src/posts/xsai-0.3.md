@@ -105,7 +105,7 @@ const weatherObject: Tool = {
   description: 'Get the weather in a location',
   execute: (params) => 'cloudy', // params: unknown
   name: 'weather',
-  // JSON Schema auto-completion
+  // Record<string, unknown>
   parameters: {
     additionalProperties: false,
     properties: {
@@ -125,6 +125,7 @@ const weatherRawTool = rawTool<{ location: string }>({
   description: 'Get the weather in a location',
   execute: ({ location }) => 'cloudy', // params: { location: string }
   name: 'weather',
+  // import('xsschema').JsonSchema (JSON Schema auto-completion)
   parameters: {
     additionalProperties: false,
     properties: {
