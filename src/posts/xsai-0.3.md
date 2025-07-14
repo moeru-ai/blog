@@ -16,3 +16,131 @@ We have released xsAI v0.3, which is a "prepare to the future" update.
 This codename is also a song by Kizuna AI and you can listen to it while reading:
 
 <iframe width="100%" height="405" src="https://www.youtube.com/embed/yeD7eAuza74" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+OK, so here's the new features:
+
+- [Stream text overhaul](#stream-text-overhaul)
+- [Generate transcription improvements](#generate-transcription-improvements)
+- [Raw tool util](#raw-tool-util)
+- [Standalone stream object util](#standalone-stream-object-util)
+- [Zod 4 support](#zod-4-support)
+
+## Stream text overhaul
+
+streamText has been completely rewritten to more closely match the output of the Vercel AI SDK and to be clearer.
+
+- `chunkStream` has been removed.
+- `stepStream` is now `fullStream` (vercel compatible)
+- `StreamTextStep` has been merged with `GenerateTextStep` to become `CompletionStep`
+- Returns Promise-based `steps` and `messages` directly
+- Support for [streaming tool call arguments](https://platform.openai.com/docs/guides/function-calling?api-mode=chat#streaming)
+
+```ts
+import { streamText } from '@xsai/stream-text'
+import { createOllama } from '@xsai-ext/provider-local'
+
+const ollama = createOllama()
+
+// fullStream: ReadableStream<StreamTextEvent>
+// messages: Promise<Message[]>
+// textStream: ReadableStream<string>
+// steps: Promise<CompletionStep[]>
+const { fullStream, messages, textStream, steps } = await streamText({
+  ...ollama.chat('gemma3'),
+  messages: [
+    {
+      content: 'You are a helpful assistant.',
+      role: 'system',
+    },
+    {
+      content: 'Why is the sky blue?',
+      role: 'user',
+    },
+  ],
+})
+```
+
+## Generate transcription improvements
+
+In v0.3, we support `segments` and `words`.
+
+You can now get more detailed return data with `responseFormat` and `timestampGranularities`:
+
+```ts
+import { generateTranscription } from '@xsai/generate-transcription'
+import { createSpeaches } from '@xsai-ext/providers-local'
+
+const speaches = createSpeaches()
+
+const { duration, language, segments, text } = await generateTranscription({ 
+  ...speaches.transcription('deepdml/faster-whisper-large-v3-turbo-ct2')
+  file: await openAsBlob('./test/fixtures/basic.wav', { type: 'audio/wav' }),
+  fileName: 'basic.wav',
+  language: 'en',
+  responseFormat: 'verbose_json', 
+})
+
+const { duration, language, text, words } = await generateTranscription({ 
+  ...speaches.transcription('deepdml/faster-whisper-large-v3-turbo-ct2')
+  file: await openAsBlob('./test/fixtures/basic.wav', { type: 'audio/wav' }),
+  fileName: 'basic.wav',
+  language: 'en',
+  responseFormat: 'verbose_json', 
+  timestampGranularities: 'word', 
+})
+```
+
+## Raw tool util
+
+Previously you could only provide JSON Schema-based tools directly by passing objects, with fewer type hints.
+
+Now we have a `rawTool` tool to make your experience even better:
+
+```ts
+import type { Tool } from '@xsai/shared-chat'
+
+import { rawTool } from '@xsai/tool'
+
+const weatherObject: Tool = {
+  description: 'Get the weather in a location',
+  execute: (params) => 'cloudy', // params: unknown
+  name: 'weather',
+  // JSON Schema auto-completion
+  parameters: {
+    additionalProperties: false,
+    properties: {
+      location: {
+        description: 'The location to get the weather for',
+        type: 'string',
+      },
+    },
+    required: [
+      'location',
+    ],
+    type: 'object',
+  },
+}
+
+const weatherRawTool = rawTool<{ location: string }>({
+  description: 'Get the weather in a location',
+  execute: ({ location }) => 'cloudy', // params: { location: string }
+  name: 'weather',
+  parameters: {
+    additionalProperties: false,
+    properties: {
+      location: {
+        description: 'The location to get the weather for',
+        type: 'string',
+      },
+    },
+    required: [
+      'location',
+    ],
+    type: 'object',
+  },
+})
+```
+
+## Standalone stream object util
+
+## Zod 4 support
