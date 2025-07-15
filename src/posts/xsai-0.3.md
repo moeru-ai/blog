@@ -145,7 +145,7 @@ const weatherRawTool = rawTool<{ location: string }>({
 
 ## Standalone stream object util
 
-We've split out the internal implementation of streamObject so you can use it on its own:
+We've split out the internal implementation of `streamObject` so you can use it on its own:
 
 ```ts
 import { toElementStream, toPartialObjectStream } from '@xsai/stream-object'
