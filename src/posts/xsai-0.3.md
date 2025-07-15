@@ -28,7 +28,7 @@ OK, so here's the new features:
 
 ## Stream text overhaul
 
-streamText has been completely rewritten to more closely match the output of the Vercel AI SDK and to be clearer.
+`streamText` has been completely rewritten to more closely match the output of the Vercel AI SDK and to be clearer.
 
 - `chunkStream` has been removed.
 - `stepStream` is now `fullStream` (vercel compatible)
