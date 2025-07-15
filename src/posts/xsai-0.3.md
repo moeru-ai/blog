@@ -169,7 +169,7 @@ You can now use it in `tool` or `{generate,stream}-object`.
 
 In v0.4, we will have some important updates:
 
-- prepareStep
+- `prepareStep`
 - OpenTelemetry support (`@xsai-ext/opentelemetry`)
 - Response API support (very experimental)
 
