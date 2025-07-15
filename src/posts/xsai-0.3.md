@@ -1,12 +1,13 @@
 ---
 title: 'Announcing xsAI 0.3 "future base"'
-date: 2025-07-14
+date: 2025-07-15
 author: 藍+85CD
 tags:
   - Announcements
 metas:
   description: extra-small AI SDK.
-  image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.3.0-beta.9&wide=true
+  image: https://npm.chart.dev/__og-image__/image/@xsai/shared/og.png
+  # image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.3.0-beta.9&wide=true
 ---
 
 Nice to see you again!
@@ -144,4 +145,38 @@ const weatherRawTool = rawTool<{ location: string }>({
 
 ## Standalone stream object util
 
+We've split out the internal implementation of streamObject so you can use it on its own:
+
+```ts
+import { toElementStream, toPartialObjectStream } from '@xsai/stream-object'
+
+const elementStream = await fetch('https://example.com')
+  .then(res => res.body!.pipeThrough(new TextDecoderStream()))
+  .then(stream => toElementStream<{ foo: { bar: 'baz' }}>(stream))
+
+const partialObjectStream = await fetch('https://example.com')
+  .then(res => res.body!.pipeThrough(new TextDecoderStream()))
+  .then(stream => toPartialObjectStream<{ foo: { bar: 'baz' }}>(stream))
+```
+
 ## Zod 4 support
+
+Although we already had imperfect compatibility in v0.2.2, we now officially support Zod 4 and Zod Mini.
+
+You can now use it in `tool` or `{generate,stream}-object`.
+
+## What's Next?
+
+In v0.4, we will have some important updates:
+
+- prepareStep
+- OpenTelemetry support (`@xsai-ext/opentelemetry`)
+- Response API support (very experimental)
+
+By the time you read this, we may already be preparing. stay tuned!
+
+## Join our Community
+
+If you have questions about anything related to xsAI,
+
+you're always welcome to ask our community on [GitHub Discussions](https://github.com/moeru-ai/xsai/discussions).
