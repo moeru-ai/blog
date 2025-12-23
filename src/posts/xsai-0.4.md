@@ -34,11 +34,62 @@ Alright, let's take a look:
 
 ## All-In-One Providers
 
+We now have a new package: `@xsai-ext/providers`
+
+It codegen most providers based on data from https://models.dev, with a small portion completed manually.
+
+This includes the model list, so your editor can auto-completion to the latest models.
+
+```ts
+import { anthropic, google, openai } from '@xsai-ext/providers'
+
+anthropic.chat('claude-sonnet-4-5-20250929') // claude-haiku-4-5-20251001, claude-opus-4-5-20251101...
+google.chat('gemini-3-pro-preview') // gemini-3-flash-preview...
+openai.chat('gpt-5.2') // gpt-5.2-chat-latest, gpt-5.2-pro...
+```
+
+### Metadata
+
+> TODO
+
 ## Reasoning Content
+
+We now officially support the `reasoning_content` field in messages.
+
+Please note that this is different from [`extractReasoning`](https://xsai.js.org/docs/packages/utils/reasoning#extractreasoning). It requires support from the API itself, where is outside the OpenAI specification.
+
+For example, you can try DeepSeek:
+
+```ts
+improt { generateText } from '@xsai/generate-text'
+import { deepseek } from '@xsai-ext/providers'
+
+const { reasoningText, text } = await generateText({
+  ...deepseek.chat('deepseek-chat'),
+  thinking: { type: 'enabled' }, // https://api-docs.deepseek.com/guides/thinking_mode
+  messages: [{
+    role: 'user',
+    content: '9.11 and 9.8, which is greater?'
+  }]
+})
+
+// res.choices[0].message.reasoning_content
+console.log(reasoningText)
+
+// res.choices[0].message.content
+console.log(text)
+```
+
+xsAI automatically handles the `reasoning_content` field,
+but for `<think></think>` tags within the `content` field, you currently still need to use `extractReasoning`.
 
 ## Stream Transcription
 
+> TODO
+
 ## Telemetry
+
+> TODO
 
 ## Standard JSON Schema
 
