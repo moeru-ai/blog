@@ -6,8 +6,7 @@ tags:
   - Announcements
 metas:
   description: extra-small AI SDK.
-  image: https://npm.chart.dev/__og-image__/image/@xsai/shared/og.png
-  # image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.4.0-beta.13&wide=true
+  image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.4.0&wide=true
 ---
 
 After more than five months, we have finally released xsAI 0.4.
