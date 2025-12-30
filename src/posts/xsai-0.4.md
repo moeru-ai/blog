@@ -1,13 +1,13 @@
 ---
 title: 'Announcing xsAI 0.4 "AIAIAI"'
-date: 2025-12-25
+date: 2025-12-30
 author: 藍+85CD
 tags:
   - Announcements
 metas:
   description: extra-small AI SDK.
   image: https://npm.chart.dev/__og-image__/image/@xsai/shared/og.png
-  # image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.4.0-beta.10&wide=true
+  # image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.4.0-beta.13&wide=true
 ---
 
 After more than five months, we have finally released xsAI 0.4.
@@ -48,9 +48,30 @@ google.chat('gemini-3-pro-preview') // gemini-3-flash-preview...
 openai.chat('gpt-5.2') // gpt-5.2-chat-latest, gpt-5.2-pro...
 ```
 
-### Metadata
+To create a new provider:
 
-> TODO
+```diff
+- import { createChatProvider, createModelProvider, merge } from '@xsai-ext/shared-providers'
++ import { createChatProvider, createModelProvider, merge } from '@xsai-ext/providers/utils'
+
+/**
+ * Create a Foo Provider
+ * @see {@link https://example.com}
+ */
+export const createFoo = (apiKey: string, baseURL = 'https://example.com/v1/') => merge(
+  createChatProvider({ apiKey, baseURL }),
+  createModelProvider({ apiKey, baseURL }),
+)
+
+/**
+ * Foo Provider
+ * @see {@link https://example.com}
+ * @remarks
+ * - baseURL - `https://example.com/v1/`
+ * - apiKey - `FOO_API_KEY`
+ */
+export const foo = createFoo(process.env.FOO_API_KEY ?? '')
+```
 
 ## Reasoning Content
 
@@ -85,11 +106,60 @@ but for `<think></think>` tags within the `content` field, you currently still n
 
 ## Stream Transcription
 
-> TODO
+You can now stream STT:
+
+```ts
+import { streamTranscription } from '@xsai/stream-transcription'
+import { openAsBlob } from 'node:fs'
+import { env } from 'node:process'
+
+const { textStream } = streamTranscription({
+  apiKey: env.OPENAI_API_KEY!,
+  baseURL: 'https://api.openai.com/v1/',
+  file: await openAsBlob('./test/fixtures/basic.wav', { type: 'audio/wav' }),
+  fileName: 'basic.wav',
+  language: 'en',
+  model: 'gpt-4o-transcribe',
+})
+```
 
 ## Telemetry
 
-> TODO
+xsAI now supports OTEL's [GenAI Attributes](https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/):
+
+```diff
+- import { generateText, streamText } from 'xsai'
++ import { generateText, streamText } from '@xsai-ext/telemetry'
+```
+
+```ts
+import { generateText } from '@xsai-ext/telemetry'
+import { env } from 'node:process'
+
+const instructions = 'You\'re a helpful assistant.'
+
+const { text } = await generateText({
+  apiKey: env.OPENAI_API_KEY!,
+  baseURL: 'https://api.openai.com/v1/',
+  messages: [
+    {
+      content: instructions, 
+      role: 'system'
+    },
+    {
+      content: 'Why is the sky blue?',
+      role: 'user'
+    }
+  ],
+  model: 'gpt-4o',
+  telemetry: { 
+    attributes: { 
+      'gen_ai.agent.name': 'weather-assistant', 
+      'gen_ai.agent.description': instructions, 
+    }, 
+  }, 
+})
+```
 
 ## Standard JSON Schema
 
