@@ -6,7 +6,7 @@ tags:
   - Announcements
 metas:
   description: extra-small AI SDK.
-  image: https://bundlephobia.com/api/stats-image?name=xsai&version=0.5.0&wide=true
+  image: https://npm.chart.dev/__og-image__/image/@xsai/shared/og.png
 ---
 
 Long time no see—we’ve released [xsAI v0.5](https://github.com/moeru-ai/xsai/releases/tag/v0.5.0).
