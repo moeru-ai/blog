@@ -27,6 +27,7 @@ Let's walk through the parts that matter:
 - [Safer and more flexible tools](#safer-and-more-flexible-tools)
 - [Streaming speech](#streaming-speech)
 - [A smaller core and refreshed providers](#a-smaller-core-and-refreshed-providers)
+- [More xsAI Projects](#more-xsai-projects)
 - [Breaking changes](#breaking-changes)
 - [What's next?](#what-s-next)
 
@@ -248,6 +249,103 @@ and v0.5 also includes further size reductions.
 The `@xsai-ext/providers` package has been synchronized with upstream model data again.
 
 The top-level `xsai` package now re-exports the streaming speech utility and the shared stream helpers as well.
+
+## More xsAI Projects
+
+### [`xsai-codex`](https://github.com/moeru-ai/xsai-codex)
+
+An OpenAI Codex provider for xsAI.
+It handles Codex's headless device authorization and gives you a provider that can be passed directly to
+`@xsai-ext/responses`:
+
+```ts
+import { responses } from '@xsai-ext/responses'
+import { authorizeCodexHeadless, createCodex } from 'xsai-codex'
+
+const auth = await authorizeCodexHeadless({
+  onUserCode: ({ instructions }) => {
+    console.log(instructions)
+  },
+})
+
+const codex = await createCodex({ auth })
+
+const { textStream } = responses({
+  ...(await codex('gpt-5.5')),
+  input: 'Write a small TypeScript function.',
+  instructions: 'You are a helpful assistant.',
+  store: false,
+})
+
+let text = ''
+for await (const chunk of textStream)
+  text += chunk
+
+console.log(text)
+```
+
+Codex requires `store: false`, and the repository documents the other Codex-specific limitations.
+
+### [`xsai-chromium-prompt`](https://github.com/moeru-ai/xsai-chromium-prompt)
+
+Want to run a small model directly in a browser?
+This wraps the Chromium Prompt API
+and aligns it with the xsAI provider interface, allowing `generateText` and `streamText` to use Gemini Nano
+inside a compatible Chromium-based browser:
+
+```ts
+import { generateText } from '@xsai/generate-text'
+import { checkPromptAvailability, createChatProvider } from 'xsai-chromium-prompt'
+
+const availability = await checkPromptAvailability()
+
+if (availability === 'available') {
+  const chatProvider = createChatProvider()
+  const { text } = await generateText({
+    ...chatProvider.chat(),
+    messages: [{
+      content: 'Why is the sky blue?',
+      role: 'user',
+    }],
+  })
+
+  console.log(text)
+}
+```
+
+This is a browser-local provider, so it does not need a cloud API key.
+The browser and device still need to meet Chromium's requirements for Gemini Nano, and the model may need to be downloaded first.
+The Prompt API can also accept image and audio inputs when you declare them through `expectedInputs`.
+
+### [`xsai-apple-speech`](https://github.com/moeru-ai/xsai-apple-speech)
+
+This brings Apple's macOS Speech framework to xsAI.
+It supports batch and live, on-device transcription from Node.js and Electron through the same Provider interface.
+
+For direct Node.js or Electron main-process use, create the native provider and pass it to `generateTranscription`:
+
+```ts
+import { generateTranscription } from '@xsai/generate-transcription'
+import { createAppleSpeechProvider } from '@xsai-apple-speech/transcription-native'
+
+const provider = createAppleSpeechProvider()
+const availability = await provider.isAvailable()
+
+if (!availability.available)
+  throw new Error(`${availability.reason.code}: ${availability.reason.message}`)
+
+const { text } = await generateTranscription({
+  ...provider.transcription({ locale: 'en-US' }),
+  file: new Blob([audioBytes], { type: 'audio/wav' }),
+})
+
+console.log(text)
+```
+
+Live transcription is available through `streamTranscription`, while Electron renderers can use the dedicated
+`@xsai-apple-speech/transcription-electron-plugin` package.
+This project requires macOS 26 or later at runtime, and building the native addon requires Node.js 22.18 or later,
+Xcode 26, and the macOS 26 SDK.
 
 ## Breaking changes
 
