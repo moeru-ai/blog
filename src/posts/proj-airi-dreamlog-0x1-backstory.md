@@ -34,7 +34,7 @@ chat, interact, play with LLM driven and powered characters.
 However, this wasn't the limit of what Project AIRI could do, we offer
 full-stack deployment on both Web based on Web technologies and desktop application
 based on Tauri, enables you not only owning a self-hosted AI VTuber, but also a AI
-waifu / AI husbando, or, what you could think of, a companion, virtually in
+waifu, or, what you could think of, a companion, virtually in
 cyber space.
 
 For the current state, Project AIRI managed to achieve fully real-time
